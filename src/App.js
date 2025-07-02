@@ -1,16 +1,23 @@
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 import './App.css';
 import AppRoutes from './routes/AppRoutes';
 import Navbar from './components/Navbar';
+import bgImage from './image/township.png';
+//import './AppWelcome.css';
 
 function App() {
   return (
-    <div className="App h-full">
-      <BrowserRouter>
+    <div
+      className="welcome-bg"
+      style={{ backgroundImage: `url(${bgImage})})` }}
+    >
+      <Router>
         <Navbar/>
         <AppRoutes />
-      </BrowserRouter>
+      </Router>
     </div>
+
+    
   );
 }
 

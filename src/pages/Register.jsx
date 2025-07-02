@@ -4,11 +4,12 @@ import { useNavigate } from 'react-router-dom';
 export const Register = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
-    name: "",
-    email: "",
+    userName: "",
     password: "",
+    role: "",
   });
 
+  console.log("Register formData:", formData);
   const [error, setError] = useState("");
 
   const handleChange = (e) => {
@@ -23,18 +24,36 @@ export const Register = () => {
     setError("");
 
     try {
-      // Replace this with your actual API call
-      const response = await fetch("/api/register", {
+      const response = await fetch(
+        `${process.env.REACT_APP_COMMUNITY_REPORTER_API_URL}/Auth/register`,
+        {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
 
-      if (!response.ok) {
-        throw new Error("Registration failed");
+      let resultText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(resultText);
+      } catch {
+        result = resultText;
       }
 
-      const result = await response.json();
+      if (!response.ok) {
+        // if result is an object, try to extract a message or title
+        let errorMsg = "Registration failed";
+        if (typeof result === "string") {
+          errorMsg = result; 
+        } else if (result?.message) {
+          errorMsg = result.message;
+        } else if (result?.title) {
+          errorMsg = result.title;
+        }
+        setError(result?.message || result?.error || result || "Registration failed");
+        return;
+      }
+
       console.log("User registered:", result);
 
       // Redirect to login after successful registration
@@ -53,18 +72,9 @@ export const Register = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <input
           type="text"
-          name="name"
-          placeholder="Full Name"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          className="border px-3 py-2 rounded"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Email Address"
-          value={formData.email}
+          name="userName"
+          placeholder="Username"
+          value={formData.userName}
           onChange={handleChange}
           required
           className="border px-3 py-2 rounded"
@@ -78,6 +88,14 @@ export const Register = () => {
           required
           className="border px-3 py-2 rounded"
         />
+        <input
+          type="text"
+          name="role"
+          placeholder="Role (e.g., User, Admin)"
+          value={formData.role}
+          onChange={handleChange}
+          className="border px-3 py-2 rounded"
+          />
         <button
           type="submit"
           className="bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700"

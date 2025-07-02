@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const Login = () => {
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -16,11 +16,11 @@ export const Login = () => {
       // Simulate API call delay
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      if (email === "test@example.com" && password === "password") {
+      if (username === "username" && password === "password") {
         alert("Login successful!");
         // Redirect or update your app state here
       } else {
-        setError("Invalid email or password");
+        setError("Invalid username or password");
       }
     } catch (err) {
       setError("Login failed. Try again.");
@@ -35,14 +35,14 @@ export const Login = () => {
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <label>
-          Email:
+          Username:
           <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            type="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
             required
             className="w-full border px-3 py-2 rounded mt-1"
-            placeholder="you@example.com"
+            placeholder="username"
           />
         </label>
 
