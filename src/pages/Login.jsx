@@ -1,30 +1,50 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
 
-    // Here you would normally call your login API
     try {
-      // Simulate API call delay
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await fetch(
+        `${process.env.REACT_APP_COMMUNITY_REPORTER_API_URL}/Auth/login`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ userName: username, password }),
+        }
+      );
 
-      if (username === "username" && password === "password") {
-        alert("Login successful!");
-        // Redirect or update your app state here
-      } else {
-        setError("Invalid username or password");
+      let resultText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(resultText);
+      } catch {
+        result = resultText;
       }
-    } catch (err) {
-      setError("Login failed. Try again.");
-    }
+      if (response.ok && result.token) {
+        //to keep the usr logged in
+        localStorage.setItem("user", JSON.stringify({ userName: username }));
+        localStorage.setItem("token", result.token);
+        // Redirect or update your app state here
+        alert("Login successful!");
+        navigate("/home");
+      } else {
+
+        setError(result?.message || result?.error || result || "Invalid username or password");
+      }
+
+      } catch (err) {
+        setError("Login failed. Try again.");
+      }
 
     setLoading(false);
   };
@@ -37,7 +57,7 @@ export const Login = () => {
         <label>
           Username:
           <input
-            type="username"
+            type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required

@@ -1,0 +1,84 @@
+/* src/pages/Landing.css */
+.landing-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.65);
+  height: 100vh;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 20px;
+  padding: 40px 30px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 480px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+ 
+.title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #fff;
+}
+
+.btn-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.btn {
+  padding: 12px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  background-color: #0d6efd;
+  color: white;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #0949b4;
+}
+
+.register {
+  background-color: #198754;
+}
+
+.register:hover {
+  background-color: #146c43;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: #fff;
+  color: #333;
+  border-radius: 12px;
+  padding: 20px;
+  width: 100px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.card img {
+  width: 100px;         /* Increase width */
+  height: 100px;        /* Optional: force height to match */
+  margin-bottom: 15px;
+  object-fit: contain; /* Makes sure the image fits without distortion */
+}
+
