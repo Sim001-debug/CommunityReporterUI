@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom"
-//import bgImage from '../image/township.png';
 import '../AppWelcome.css';
+import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
+    const navigate = useNavigate();
+
     return(
         <div className="home-container">
             {/* Top Bar */}
@@ -22,12 +25,11 @@ export const Home = () => {
                     Use our app to post report issues in your community. Whether it's potholes,
                     electricity problems, or safety concerns, we've got you covered.
                 </p>
-                <Link
-                    to="/report"
-                    className="bg-yellow-500 text-black font-bold px-6 py-3 rounded-lg shadow-lg hover:bg-yellow-400 transition"
-                >
-                    Post a report
-                </Link>
+                <motion.div
+                    className="post-report-button"
+                    whileHover={{ scale: 1.05 }}
+                    onClick={() => navigate("/report")}
+                >Post a Report</motion.div>
             </div>
         </div>
     );

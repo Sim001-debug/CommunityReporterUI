@@ -6,7 +6,7 @@ const mapCenter = { lat: -33.918861, lng: 18.4233 }; // Default to Cape Town
 
 export const ReportForm = () => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, // Securely loaded from .env
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY, 
   });
 
   const [formData, setFormData] = useState({
@@ -40,16 +40,27 @@ export const ReportForm = () => {
     }
 
     const payload = new FormData();
-    payload.append("title", formData.title);
-    payload.append("description", formData.description);
+    payload.append("userId", currentUser.id);
     payload.append("category", formData.category);
+    payload.append("description", formData.description);
+    payload.append("owner", currentUser.fullName); // optional
     payload.append("latitude", marker.lat);
     payload.append("longitude", marker.lng);
     payload.append("image", image);
-    payload.append("userId", currentUser.id);
+
+    console.log("Form Data:", {
+      title: formData.title,
+      description: formData.description,
+      category: formData.category,
+      latitude: marker.lat,
+      longitude: marker.lng,
+      image: image,
+      userId: currentUser.id
+    });
 
     try {
-      const response = await fetch("/api/reports", {
+      const response = await fetch(
+        `${process.env.REACT_COMMUNITY_REPORTER_API_URL}/`, {
         method: "POST",
         body: payload,
       });
