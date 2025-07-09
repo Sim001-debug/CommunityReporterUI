@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import illustration from "../image/login-illustration.png"; // Make sure the image path is correct
 
 export const Login = () => {
   const [username, setUsername] = useState("");
@@ -30,64 +31,112 @@ export const Login = () => {
       } catch {
         result = resultText;
       }
+
       if (response.ok && result.token) {
-        //to keep the usr logged in
         localStorage.setItem("user", JSON.stringify({ userName: username }));
         localStorage.setItem("token", result.token);
-        // Redirect or update your app state here
         alert("Login successful!");
         navigate("/home");
       } else {
-
-        setError(result?.message || result?.error || result || "Invalid username or password");
+        setError(result?.message || "Invalid username or password");
       }
-
-      } catch (err) {
-        setError("Login failed. Try again.");
-      }
+    } catch (err) {
+      setError("Login failed. Try again.");
+    }
 
     setLoading(false);
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 mt-10 bg-white rounded shadow-md">
-      <h3 className="text-2xl mb-6 font-semibold text-center">Login Section</h3>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-        <label>
-          Username:
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-            className="w-full border px-3 py-2 rounded mt-1"
-            placeholder="username"
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-100 to-blue-300 px-4 py-10">
+      <div className="flex flex-col md:flex-row w-full max-w-5xl bg-white rounded-xl shadow-2xl overflow-hidden">
+        
+        {/* Illustration - left side */}
+        <div className="w-full md:w-1/2 bg-blue-100 flex items-center justify-center p-6">
+          <img
+            src={illustration}
+            alt="Login Illustration"
+            className="w-full h-auto max-w-xs md:max-w-md object-contain"
           />
-        </label>
+        </div>
 
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            className="w-full border px-3 py-2 rounded mt-1"
-            placeholder="********"
-          />
-        </label>
+        {/* Login form - right side */}
+        <div className="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center">
+          <h2 className="text-3xl font-bold text-blue-700 mb-2">Welcome!</h2>
+          <p className="text-sm text-gray-500 mb-6">Sign in to your account</p>
 
-        {error && <p className="text-red-600">{error}</p>}
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
+              className="border px-4 py-2 rounded-full focus:ring-2 focus:ring-blue-400"
+              required
+            />
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
+              className="border px-4 py-2 rounded-full focus:ring-2 focus:ring-blue-400"
+              required
+            />
 
-        <button
-          type="submit"
-          disabled={loading}
-          className="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 disabled:opacity-50"
-        >
-          {loading ? "Logging in..." : "Login"}
-        </button>
-      </form>
+            <div className="text-sm text-right">
+              <a href="#" className="text-blue-600 hover:underline">
+                Forgot Password?
+              </a>
+            </div>
+
+            {error && (
+              <p className="text-red-600 text-sm text-center">{error}</p>
+            )}
+
+            <div className="flex gap-4 justify-center">
+              <button
+                type="submit"
+                disabled={loading}
+                className="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
+              >
+                {loading ? "Signing in..." : "SIGN IN"}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => navigate("/register")}
+                className="border border-blue-600 text-blue-600 px-6 py-2 rounded-full hover:bg-blue-50"
+              >
+                SIGN UP
+              </button>
+            </div>
+
+            <div className="mt-6 text-center">
+              <p className="text-gray-400 text-sm mb-2">OR LOGIN WITH</p>
+              <div className="flex justify-center gap-4">
+                <button className="border rounded-full p-2 hover:shadow-md">
+                  <img
+                    src="https://img.icons8.com/color/24/000000/facebook-new.png"
+                    alt="facebook"
+                  />
+                </button>
+                <button className="border rounded-full p-2 hover:shadow-md">
+                  <img
+                    src="https://img.icons8.com/color/24/000000/google-logo.png"
+                    alt="google"
+                  />
+                </button>
+                <button className="border rounded-full p-2 hover:shadow-md">
+                  <img
+                    src="https://img.icons8.com/color/24/000000/linkedin.png"
+                    alt="linkedin"
+                  />
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
