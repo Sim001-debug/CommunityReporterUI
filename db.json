@@ -1,0 +1,60 @@
+{
+  "reports": [
+    {
+      "reportId": "1",
+      "userId": "user-1",
+      "category": "Road Damage",
+      "description": "Big pothole near the traffic lights",
+      "imageUrl": "",
+      "latitude": -33.918861,
+      "longitude": 18.4233,
+      "status": "Open",
+      "createdAt": "2025-07-01T10:00:00Z",
+      "owner": "Sibongile",
+      "updatedDate": "2025-07-01T10:00:00Z",
+      "id": "c9f3"
+    },
+    {
+      "reportId": "2",
+      "userId": "user-2",
+      "category": "Water Leak",
+      "description": "Leak under the main street",
+      "imageUrl": "",
+      "latitude": -33.9205,
+      "longitude": 18.4238,
+      "status": "In-Progress",
+      "createdAt": "2025-07-05T12:00:00Z",
+      "owner": "Lungile",
+      "updatedDate": "2025-07-06T08:30:00Z",
+      "id": "72ea"
+    },
+    {
+      "reportId": "3",
+      "userId": "user-4",
+      "category": "Electric Fault",
+      "description": "No power for 3 days",
+      "imageUrl": "",
+      "latitude": -33.922,
+      "longitude": 18.4249,
+      "status": "Closed",
+      "createdAt": "2025-07-10T14:00:00Z",
+      "owner": "Bheki",
+      "updatedDate": "2025-07-11T09:20:00Z",
+      "id": "173f"
+    },
+    {
+      "id": "1766",
+      "reportId": "4",
+      "userId": "user-4",
+      "category": "Graffiti",
+      "description": "Graffiti near mall",
+      "imageUrl": "",
+      "latitude": -33.925,
+      "longitude": 18.423,
+      "status": "Open",
+      "createdAt": "2025-07-14T12:00:00Z",
+      "owner": "Xolani",
+      "updatedDate": "2025-07-14T12:00:00Z"
+    }
+  ]
+}

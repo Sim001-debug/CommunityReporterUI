@@ -10,7 +10,6 @@ export const ReportForm = () => {
   });
 
   const [formData, setFormData] = useState({
-    title: "",
     description: "",
     category: "",
   });
@@ -39,17 +38,21 @@ export const ReportForm = () => {
       return;
     }
 
+   console.log("Current user:", currentUser);
+   console.log("User ID:", currentUser?.id);
+
+
     const payload = new FormData();
     payload.append("userId", currentUser.id);
     payload.append("category", formData.category);
     payload.append("description", formData.description);
-    payload.append("owner", currentUser.fullName); // optional
+    payload.append("owner", currentUser.fullName || "Anonymous"); // optional
     payload.append("latitude", marker.lat);
     payload.append("longitude", marker.lng);
     payload.append("image", image);
 
     console.log("Form Data:", {
-      title: formData.title,
+      currentUser: formData.id,
       description: formData.description,
       category: formData.category,
       latitude: marker.lat,
@@ -60,7 +63,7 @@ export const ReportForm = () => {
 
     try {
       const response = await fetch(
-        `${process.env.REACT_COMMUNITY_REPORTER_API_URL}/`, {
+        `${process.env.REACT_APP_COMMUNITY_REPORTER_API_URL}/Reports`, {
         method: "POST",
         body: payload,
       });
@@ -71,7 +74,8 @@ export const ReportForm = () => {
         setMarker(null);
         setImage(null);
       } else {
-        setMessage("Something went wrong.");
+        const errorText = await response.text();
+        setMessage(errorText || `Something went wrong.`);
       }
     } catch (err) {
       console.error(err);
@@ -86,7 +90,7 @@ export const ReportForm = () => {
       <h2 className="text-xl font-semibold mb-4">Report an Issue</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
 
-        <input
+        {/* <input
           type="text"
           name="title"
           value={formData.title}
@@ -94,7 +98,7 @@ export const ReportForm = () => {
           placeholder="Title"
           required
           className="w-full border p-2 rounded"
-        />
+        /> */}
 
         <textarea
           name="description"

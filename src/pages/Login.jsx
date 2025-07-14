@@ -33,7 +33,7 @@ export const Login = () => {
       }
 
       if (response.ok && result.token) {
-        localStorage.setItem("user", JSON.stringify({ userName: username }));
+        localStorage.setItem("user", JSON.stringify({ id: result.id, userName: username }));
         localStorage.setItem("token", result.token);
         alert("Login successful!");
         navigate("/home");
