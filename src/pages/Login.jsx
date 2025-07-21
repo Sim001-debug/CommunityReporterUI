@@ -52,13 +52,13 @@ export const Login = () => {
       <div className="flex flex-col md:flex-row w-full max-w-5xl bg-white rounded-xl shadow-2xl overflow-hidden">
         
         {/* Illustration - left side */}
-        <div className="w-full md:w-1/2 bg-blue-100 flex items-center justify-center p-6">
+        {/* <div className="w-full md:w-1/2 bg-blue-100 flex items-center justify-center p-6">
           <img
             src={illustration}
             alt="Login Illustration"
             className="w-full h-auto max-w-xs md:max-w-md object-contain"
           />
-        </div>
+        </div> */}
 
         {/* Login form - right side */}
         <div className="w-full md:w-1/2 p-8 sm:p-12 flex flex-col justify-center">
@@ -83,11 +83,11 @@ export const Login = () => {
               required
             />
 
-            <div className="text-sm text-right">
+            {/* <div className="text-sm text-right">
               <a href="#" className="text-blue-600 hover:underline">
                 Forgot Password?
               </a>
-            </div>
+            </div> */}
 
             {error && (
               <p className="text-red-600 text-sm text-center">{error}</p>
@@ -109,30 +109,6 @@ export const Login = () => {
               >
                 SIGN UP
               </button>
-            </div>
-
-            <div className="mt-6 text-center">
-              <p className="text-gray-400 text-sm mb-2">OR LOGIN WITH</p>
-              <div className="flex justify-center gap-4">
-                <button className="border rounded-full p-2 hover:shadow-md">
-                  <img
-                    src="https://img.icons8.com/color/24/000000/facebook-new.png"
-                    alt="facebook"
-                  />
-                </button>
-                <button className="border rounded-full p-2 hover:shadow-md">
-                  <img
-                    src="https://img.icons8.com/color/24/000000/google-logo.png"
-                    alt="google"
-                  />
-                </button>
-                <button className="border rounded-full p-2 hover:shadow-md">
-                  <img
-                    src="https://img.icons8.com/color/24/000000/linkedin.png"
-                    alt="linkedin"
-                  />
-                </button>
-              </div>
             </div>
           </form>
         </div>

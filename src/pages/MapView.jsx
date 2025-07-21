@@ -32,8 +32,14 @@ export const MapView = () => {
   useEffect(() => {
     const fetchReports = async () => {
       try {
+        const token = localStorage.getItem("token");
         const res = await fetch(
-          `${process.env.REACT_APP_COMMUNITY_REPORTER_API_URL}/Reports`
+          `${process.env.REACT_APP_COMMUNITY_REPORTER_API_URL}/Reports`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         if (res.ok) {
           const data = await res.json();
