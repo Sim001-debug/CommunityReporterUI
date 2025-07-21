@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { AdminDashboard } from "../pages/AdminDashboard";
+// import { AdminDashboard } from "../pages/AdminDashboard";
 import { Home } from "../pages/Home";
 import { Login } from "../pages/Login";
 import { MapView } from "../pages/MapView";
@@ -12,7 +12,7 @@ export default function AppRoutes() {
     <div>
       <Routes>
         <Route path="/home" element={<Home />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        {/* <Route path="/admin" element={<AdminDashboard />} /> */}
         <Route path="/login" element={<Login />} />
         <Route path="/map" element={<MapView />} />
         <Route path="/my-report" element={<MyReport />} />
